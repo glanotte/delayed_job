@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'daemons'
+require 'daemons_extension'
 require 'optparse'
 
 module Delayed
@@ -74,7 +75,7 @@ module Delayed
     end
     
     def run_process(process_name, dir)
-      Daemons.run_proc(process_name, :dir => dir, :dir_mode => :normal, :monitor => @monitor, :ARGV => @args) do |*args|
+      Daemons.run_proc(process_name, :force_kill_wait => 15, :dir => dir, :dir_mode => :normal, :monitor => @monitor, :ARGV => @args) do |*args|
         run process_name
       end
     end

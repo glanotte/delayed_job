@@ -132,6 +132,7 @@ module Delayed
     # Reschedule the job in the future (when a job fails).
     # Uses an exponential scale depending on the number of failed attempts.
     def reschedule(job, time = nil)
+      job.attempts ||= 0 ## sql server does not always see default values
       if (job.attempts += 1) < self.class.max_attempts
         time ||= Job.db_time_now + (job.attempts ** 4) + 5
         job.run_at = time

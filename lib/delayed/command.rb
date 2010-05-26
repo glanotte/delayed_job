@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'daemons'
-require 'daemons_extension'
 require 'optparse'
+require File.dirname(__FILE__) + '/daemons_extension'
 
 module Delayed
   class Command
